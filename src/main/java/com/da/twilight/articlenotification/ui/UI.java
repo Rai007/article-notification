@@ -311,7 +311,7 @@ public class UI extends javax.swing.JFrame implements IUI {
     
     @Override
     public void onNotify(String msg){
-        playSound("sound/play.wav");
+        playSound("sound/accomplished.wav");
         trayIcon.displayMessage(this.appTitle, msg , TrayIcon.MessageType.WARNING);
         
         chuangshiQQTxt.setText(msg);
