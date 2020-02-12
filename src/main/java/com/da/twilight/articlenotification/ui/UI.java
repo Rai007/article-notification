@@ -32,7 +32,6 @@ import javax.swing.JFrame;
 import net.da.backing.manager.ChangeManager.ChangeEvent;
 import net.da.backing.manager.ChangeManager;
 import com.da.twilight.articlenotification.service.model.Chapter;
-import java.io.File;
 
 /**
  *
@@ -238,8 +237,9 @@ public class UI extends javax.swing.JFrame implements IUI {
             System.out.println("SystemTray is not supported");
             return;
         }
+        
         final PopupMenu popup = new PopupMenu();
-        this.trayIcon = new TrayIcon(createImage("images" + File.separator+ "logo.png", appTitle + "'s running"));
+        this.trayIcon = new TrayIcon(createImage("images/logo.png", appTitle + "'s running"));
         trayIcon.setImageAutoSize(true);
         trayIcon.addMouseListener(new MouseListener() {
             @Override
@@ -299,8 +299,8 @@ public class UI extends javax.swing.JFrame implements IUI {
         setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
     
-    protected static Image createImage(String path, String description) {
-        URL imageURL = UI.class.getResource(path);
+    protected Image createImage(String path, String description) {
+        URL imageURL = getClass().getResource(path);
         if (imageURL == null) {
             System.err.println("Resource not found: " + path);
             return null;

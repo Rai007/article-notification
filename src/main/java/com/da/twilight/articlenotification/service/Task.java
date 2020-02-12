@@ -55,7 +55,7 @@ public class Task implements Runnable{
             
             if(c1.getTitle() != null && controller.chuangShiQQChapterUpdate( c1 )) {
                 // add a list of website adapters 
-                ArrayList<IStoryWebPage> list = new ArrayList();
+                ArrayList<IStoryWebPage> list = new ArrayList<>();
                 
                 Biquge5200 s3 = new Biquge5200(WC);
                 s3.setLogger(logger);

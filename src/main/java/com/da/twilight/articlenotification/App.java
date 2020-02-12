@@ -8,8 +8,6 @@ package com.da.twilight.articlenotification;
 
 import com.da.twilight.articlenotification.controller.Controller;
 
-
-
 /**
  *
  * @author ShadowWalker
