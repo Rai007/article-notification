@@ -292,7 +292,7 @@ public class UI extends javax.swing.JFrame implements IUI {
         } catch (AWTException e) {
             System.out.println("TrayIcon could not be added.");
         }
-        trayIcon.displayMessage("Tuyencv-reader","Truyencv-reader started...", TrayIcon.MessageType.INFO);
+        //trayIcon.displayMessage("Tuyencv-reader","Truyencv-reader started...", TrayIcon.MessageType.INFO);
         // default windows already have notify sound so we don't need add another sound
         // playSound("sound/slow-spring-board-longer-tail.wav");
         
