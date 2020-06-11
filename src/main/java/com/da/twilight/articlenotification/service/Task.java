@@ -8,7 +8,6 @@ package com.da.twilight.articlenotification.service;
 
 import com.da.twilight.articlenotification.controller.IController;
 import com.da.twilight.articlenotification.service.pages.Biquge5200;
-import com.da.twilight.articlenotification.service.pages.ChuangshiQQ;
 import com.da.twilight.articlenotification.service.pages.Kanshula;
 import com.da.twilight.articlenotification.service.pages.Shu69;
 import com.da.twilight.articlenotification.service.pages.abtract.IStoryWebPage;
@@ -18,6 +17,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import com.da.twilight.articlenotification.service.model.Chapter;
+import com.da.twilight.articlenotification.service.pages.Qidian;
 
 
 /**
@@ -49,7 +49,8 @@ public class Task implements Runnable{
                 controller.logMessage(msg);
             };
             
-            IStoryWebPage chuangshiQQPage = new ChuangshiQQ(WC);
+            IStoryWebPage chuangshiQQPage = new Qidian(WC);
+                                            //new ChuangshiQQ(WC);
             chuangshiQQPage.setLogger(logger);
             Chapter c1 = chuangshiQQPage.getNewestChapter();
             
