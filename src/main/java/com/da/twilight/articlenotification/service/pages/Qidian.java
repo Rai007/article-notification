@@ -8,7 +8,7 @@ package com.da.twilight.articlenotification.service.pages;
 import com.da.twilight.articlenotification.service.model.Chapter;
 import com.da.twilight.articlenotification.service.pages.abtract.AbstractStoryWebPage;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.gargoylesoftware.htmlunit.html.HtmlDivision;
+import com.gargoylesoftware.htmlunit.html.HtmlAnchor;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 
 /**
@@ -25,7 +25,7 @@ public class Qidian extends AbstractStoryWebPage{
         Chapter chapter = new Chapter();
         HtmlPage page = WC.getPage("https://book.qidian.com/info/3546912");
 
-        HtmlDivision chapterTitleE = page.getFirstByXPath(".//div[@class='book-state']//li[@class='update']//div[@class='detail']");
+        HtmlAnchor chapterTitleE = page.getFirstByXPath(".//div[@class='book-state']//li[@class='update']//div[@class='detail']//a[@class='blue']");
         chapter.setTitle(chapterTitleE.asText());
 
         return chapter;
