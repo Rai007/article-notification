@@ -23,4 +23,8 @@ public interface IUI extends Runnable {
     public boolean shu69ChapterUpdate(Chapter chapter);
     
     public void logMessage(String msg);
+    
+    public String getCurrentContentChannel();
+    
+    public void loadContentChannelList();
 }

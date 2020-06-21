@@ -32,6 +32,9 @@ import javax.swing.JFrame;
 import net.da.backing.manager.ChangeManager.ChangeEvent;
 import net.da.backing.manager.ChangeManager;
 import com.da.twilight.articlenotification.service.model.Chapter;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
+import net.da.backing.util.PackageUtil;
 
 /**
  *
@@ -70,6 +73,40 @@ public class UI extends javax.swing.JFrame implements IUI {
         changeManager.setListenerForKey("69Shu::NewestChapterContent", (ChangeEvent event) -> {
             Shu69Txtarea.setText( event.getNewValue() );
         });
+           
+        
+    }
+    
+    @Override
+    public void loadContentChannelList(){
+        // initiate content ComboBox
+        Class[] pageList = null;
+        try {
+            pageList = PackageUtil.getClasses("com.da.twilight.articlenotification.service.pages");
+        } catch (Exception ex) {
+            logMessage("Error while init Content Channel List: " + ex.toString());            
+        }
+        
+        for(Class cls:pageList){
+            if( !"AbstractStoryWebPage".equals( cls.getSimpleName() ) && !"IStoryWebPage".equals( cls.getSimpleName() ) )
+                contentChannelCb.addItem(cls.getSimpleName());
+        }
+        
+        contentChannelCb.addItemListener(new ItemListener() {
+            @Override
+            public void itemStateChanged(ItemEvent e) {
+                if(ItemEvent.SELECTED  == e.getStateChange()){
+                    System.out.println("e " + e.getItem().toString());
+                    // fetch content from specific channel name
+                    controller.loadContentChannelData( e.getItem().toString() );
+                }
+            }
+        }); 
+    }
+    
+    @Override
+    public String getCurrentContentChannel(){
+        return contentChannelCb.getSelectedItem().toString();
     }
     
     /**
@@ -93,6 +130,7 @@ public class UI extends javax.swing.JFrame implements IUI {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         Shu69Txt = new javax.swing.JTextField();
+        contentChannelCb = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -132,7 +170,7 @@ public class UI extends javax.swing.JFrame implements IUI {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 589, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -148,7 +186,7 @@ public class UI extends javax.swing.JFrame implements IUI {
             }
         });
 
-        jLabel1.setText("ChuangShi.QQ");
+        jLabel1.setText("Qidian");
 
         jLabel2.setText("69Shu:");
 
@@ -180,8 +218,11 @@ public class UI extends javax.swing.JFrame implements IUI {
                             .addComponent(jLabel2))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(chuangshiQQTxt, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(Shu69Txt))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(contentChannelCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(Shu69Txt, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(chuangshiQQTxt))))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
@@ -191,12 +232,15 @@ public class UI extends javax.swing.JFrame implements IUI {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(chuangshiQQTxt, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2)
-                    .addComponent(Shu69Txt, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(Shu69Txt, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(contentChannelCb))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(Logger, javax.swing.GroupLayout.DEFAULT_SIZE, 640, Short.MAX_VALUE)
+                .addComponent(Logger)
                 .addGap(26, 26, 26)
                 .addComponent(jButton1)
                 .addGap(12, 12, 12))
@@ -370,6 +414,7 @@ public class UI extends javax.swing.JFrame implements IUI {
     private javax.swing.JTextField Shu69Txt;
     private javax.swing.JTextArea Shu69Txtarea;
     private javax.swing.JTextField chuangshiQQTxt;
+    private javax.swing.JComboBox<String> contentChannelCb;
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;

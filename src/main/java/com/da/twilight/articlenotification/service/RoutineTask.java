@@ -24,11 +24,11 @@ import com.da.twilight.articlenotification.service.pages.Qidian;
  *
  * @author ShadowWalker
  */
-public class Task implements Runnable{
+public class RoutineTask implements Runnable{
     private final WebClient WC;
     private final IController controller;
     
-    public Task(IController controller){
+    public RoutineTask(IController controller){
         this.controller = controller;
         
         WC = BrowserUtil.getWebClient();
@@ -54,29 +54,56 @@ public class Task implements Runnable{
             chuangshiQQPage.setLogger(logger);
             Chapter c1 = chuangshiQQPage.getNewestChapter();
             
-            if(c1.getTitle() != null && controller.chuangShiQQChapterUpdate( c1 )) {
+            if(c1.getTitle() != null && controller.mainChannelChapterUpdate( c1 )) {
+                /* ver 1.0:  Create a list of page adapter . fallback to anothers if first channel not work
                 // add a list of website adapters 
                 ArrayList<IStoryWebPage> list = new ArrayList<>();
-                
-                Biquge5200 s3 = new Biquge5200(WC);
-                s3.setLogger(logger);
-                list.add(s3);
-                
-                Kanshula s1 = new Kanshula(WC);
-                s1.setLogger(logger);
-                list.add(s1);
                 
                 Shu69 s2 = new Shu69(WC);
                 s2.setLogger(logger);
                 list.add(s2);
                 
-                controller.shu69ChapterUpdate( list
+                Biquge5200 s3 = new Biquge5200(WC);
+                s3.setLogger(logger);
+                list.add(s3); 
+                
+                Kanshula s1 = new Kanshula(WC);
+                s1.setLogger(logger);
+                list.add(s1);
+                
+                controller.contentChannelChapterUpdate( list
                         .stream()
                         .map((page) -> page.getNewestChapter())
                         .filter((c2) -> (c2.getTitle() != null ))
                         .findFirst()
                         .get() 
                 );
+                */
+                
+                // ver 2.0: Get new contentChappter base on current contentChannel name is selecting
+                IStoryWebPage page ;
+                switch( controller.getCurrentContentChannel() ){
+                    case "Shu69":
+                        page = new Shu69(WC);
+                        page.setLogger(logger);
+
+                        controller.contentChannelChapterUpdate( page.getNewestChapter() );
+                        break;
+                    case "Kanshula":
+                        page = new Kanshula(WC);
+                        page.setLogger(logger);
+
+                        controller.contentChannelChapterUpdate( page.getNewestChapter() );
+                        break;
+                    case "Biquge5200":
+                        page = new Biquge5200(WC);
+                        page.setLogger(logger);
+
+                        controller.contentChannelChapterUpdate( page.getNewestChapter() );
+                        break;
+                    default:
+                        break;
+                }
             }
             
             sb.append("\t\t[OK]");

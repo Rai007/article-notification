@@ -3,7 +3,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.da.twilight</groupId>
     <artifactId>article-notification</artifactId>
-    <version>0.1.11</version>
+    <version>0.2.0</version>
     <packaging>jar</packaging>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -17,7 +17,7 @@
         <dependency>
             <groupId>net.da</groupId>
             <artifactId>backing</artifactId>
-            <version>0.1.7</version>
+            <version>0.1.11</version>
         </dependency>
         
         <dependency>

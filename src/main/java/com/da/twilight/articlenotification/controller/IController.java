@@ -14,11 +14,15 @@ import com.da.twilight.articlenotification.service.model.Chapter;
  */
 public interface IController {
     
-    public boolean chuangShiQQChapterUpdate( Chapter chapter );
+    public boolean mainChannelChapterUpdate( Chapter chapter );
     
-    public boolean shu69ChapterUpdate( Chapter chapter );
+    public boolean contentChannelChapterUpdate( Chapter chapter );
     
     public void refresh();
     
     public void logMessage(String msg);
+    
+    public String getCurrentContentChannel();
+    
+    public void loadContentChannelData(String channelName);
 }

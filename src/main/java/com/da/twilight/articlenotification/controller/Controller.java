@@ -6,7 +6,8 @@
 
 package com.da.twilight.articlenotification.controller;
 
-import com.da.twilight.articlenotification.service.Task;
+import com.da.twilight.articlenotification.service.ManualTask;
+import com.da.twilight.articlenotification.service.RoutineTask;
 import com.da.twilight.articlenotification.ui.IUI;
 import com.da.twilight.articlenotification.ui.UI;
 import java.util.concurrent.Executors;
@@ -56,53 +57,58 @@ public class Controller implements IController{
             // Entire this block will be block and wait until it end and unwind this task
             EventQueue.invokeAndWait(() -> {  
                 Controller.this.ui =  new UI( Controller.this );
+                Controller.this.ui.loadContentChannelList();
             }); 
-
+            
             // run task every 5 minutes - need to run after init UI
             service = Executors.newScheduledThreadPool(1);
             // class ScheduledExecutorService will not throw any error at all (it will stop when got exception). so need to try-catch handler in each task when run use this class
-            service.scheduleAtFixedRate( new Task( Controller.this ) , 0 , 7, TimeUnit.MINUTES);
+            service.scheduleAtFixedRate(new RoutineTask( Controller.this ) , 0 , 7, TimeUnit.MINUTES);
         }catch(Exception ex){
             logMessage("[Controller] Error: "+ ex.getMessage());
         }
     }
     
-    private boolean isChuangShiQQUpdate;
-    private boolean is69ShuUpdate;
+    @Override
+    public void loadContentChannelData(String channelName){
+        new Thread(new ManualTask(this)).start();
+    }
+    
+    private boolean isMainChannelUpdate;
+    private boolean isContentChannelUpdate;
     
     @Override
-    public boolean chuangShiQQChapterUpdate( final Chapter chapter ){
+    public boolean mainChannelChapterUpdate( final Chapter chapter ){
         try{
             EventQueue.invokeAndWait(new Runnable() {
                 @Override
                 public void run() {
-                    isChuangShiQQUpdate = ui.chuangshiQQChapterUpdate( chapter );
+                    isMainChannelUpdate = ui.chuangshiQQChapterUpdate( chapter );
                 }
             });
         }catch(Exception ex){
             logMessage("[Controller] Error : " +ex.getMessage());
         }
         
-        return isChuangShiQQUpdate;
-        
+        return isMainChannelUpdate;
     }
     
     
     @Override
-    public boolean shu69ChapterUpdate( Chapter chapter ){
+    public boolean contentChannelChapterUpdate( Chapter chapter ){
         try{
             EventQueue.invokeAndWait(() -> {
-                is69ShuUpdate = ui.shu69ChapterUpdate( chapter );
+                isContentChannelUpdate = ui.shu69ChapterUpdate( chapter );
             });
         }catch(Exception ex){
             logMessage("[Controller] Error : " +ex.getMessage());
         }
-        return is69ShuUpdate;
+        return isContentChannelUpdate;
     }
     
     @Override
     public void refresh() {
-        new Thread( new Task( this )).start();
+        new Thread( new RoutineTask( this )).start();
     }
     
     @Override
@@ -110,5 +116,10 @@ public class Controller implements IController{
         EventQueue.invokeLater(() -> {
             ui.logMessage(msg);
         });
+    }
+    
+    @Override
+    public String getCurrentContentChannel(){
+        return ui.getCurrentContentChannel();
     }
 }
