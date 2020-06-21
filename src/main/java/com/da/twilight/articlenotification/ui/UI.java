@@ -150,7 +150,7 @@ public class UI extends javax.swing.JFrame implements IUI {
         Shu69Txtarea.setEditable(false);
         Shu69Txtarea.setBackground(new java.awt.Color(255, 255, 204));
         Shu69Txtarea.setColumns(20);
-        Shu69Txtarea.setFont(new java.awt.Font("Dialog", 1, 22)); // NOI18N
+        Shu69Txtarea.setFont(new java.awt.Font("Dialog", 1, 26)); // NOI18N
         Shu69Txtarea.setForeground(new java.awt.Color(51, 51, 51));
         Shu69Txtarea.setLineWrap(true);
         Shu69Txtarea.setRows(5);
@@ -176,7 +176,7 @@ public class UI extends javax.swing.JFrame implements IUI {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 614, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 618, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -225,8 +225,8 @@ public class UI extends javax.swing.JFrame implements IUI {
                         .addGap(18, 18, 18)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(contentChannelCb, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(contentChannelCb, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(Shu69Txt, javax.swing.GroupLayout.PREFERRED_SIZE, 1190, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(chuangshiQQTxt))))
                 .addContainerGap())
@@ -240,11 +240,9 @@ public class UI extends javax.swing.JFrame implements IUI {
                     .addComponent(jLabel1))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(Shu69Txt, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(contentChannelCb))
+                    .addComponent(jLabel2)
+                    .addComponent(contentChannelCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Shu69Txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(Logger)
                 .addGap(26, 26, 26)
