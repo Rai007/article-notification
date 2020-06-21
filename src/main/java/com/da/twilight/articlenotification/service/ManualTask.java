@@ -38,7 +38,6 @@ public class ManualTask implements Runnable {
     public void run() {
         StringBuilder sb = new StringBuilder();
         sb.append("[ActiveTask] Getting content channel data");
-        sb.append("Executing...");
         
         Consumer<String> logger = (String msg) -> {
             controller.logMessage(msg);

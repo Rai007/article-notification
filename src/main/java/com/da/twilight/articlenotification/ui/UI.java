@@ -32,9 +32,12 @@ import javax.swing.JFrame;
 import net.da.backing.manager.ChangeManager.ChangeEvent;
 import net.da.backing.manager.ChangeManager;
 import com.da.twilight.articlenotification.service.model.Chapter;
+import com.da.twilight.articlenotification.service.pages.Biquge5200;
+import com.da.twilight.articlenotification.service.pages.Kanshula;
+import com.da.twilight.articlenotification.service.pages.Ptwxz;
+import com.da.twilight.articlenotification.service.pages.Shu69;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
-import net.da.backing.util.PackageUtil;
 
 /**
  *
@@ -80,12 +83,16 @@ public class UI extends javax.swing.JFrame implements IUI {
     @Override
     public void loadContentChannelList(){
         // initiate content ComboBox
-        Class[] pageList = null;
+        Class[] pageList = {Biquge5200.class, Kanshula.class, Ptwxz.class, Shu69.class};
+        /* 
         try {
+            this.getClass().getClassLoader().get
             pageList = PackageUtil.getClasses("com.da.twilight.articlenotification.service.pages");
         } catch (Exception ex) {
             logMessage("Error while init Content Channel List: " + ex.toString());            
-        }
+        } finally {
+            logMessage("Channel size: " + pageList.length);
+        } */
         
         for(Class cls:pageList){
             if( !"AbstractStoryWebPage".equals( cls.getSimpleName() ) && !"IStoryWebPage".equals( cls.getSimpleName() ) )
@@ -96,7 +103,6 @@ public class UI extends javax.swing.JFrame implements IUI {
             @Override
             public void itemStateChanged(ItemEvent e) {
                 if(ItemEvent.SELECTED  == e.getStateChange()){
-                    System.out.println("e " + e.getItem().toString());
                     // fetch content from specific channel name
                     controller.loadContentChannelData( e.getItem().toString() );
                 }

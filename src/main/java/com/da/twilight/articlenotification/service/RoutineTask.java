@@ -17,6 +17,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import java.util.ArrayList;
 import java.util.function.Consumer;
 import com.da.twilight.articlenotification.service.model.Chapter;
+import com.da.twilight.articlenotification.service.pages.Ptwxz;
 import com.da.twilight.articlenotification.service.pages.Qidian;
 
 
@@ -97,6 +98,12 @@ public class RoutineTask implements Runnable{
                         break;
                     case "Biquge5200":
                         page = new Biquge5200(WC);
+                        page.setLogger(logger);
+
+                        controller.contentChannelChapterUpdate( page.getNewestChapter() );
+                        break;
+                    case "Ptwxz":
+                        page = new Ptwxz(WC);
                         page.setLogger(logger);
 
                         controller.contentChannelChapterUpdate( page.getNewestChapter() );
