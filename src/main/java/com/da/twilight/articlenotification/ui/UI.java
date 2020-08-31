@@ -148,12 +148,13 @@ public class UI extends javax.swing.JFrame implements IUI {
         });
 
         Shu69Txtarea.setEditable(false);
-        Shu69Txtarea.setBackground(new java.awt.Color(255, 255, 204));
+        Shu69Txtarea.setBackground(new java.awt.Color(34, 34, 34));
         Shu69Txtarea.setColumns(20);
-        Shu69Txtarea.setFont(new java.awt.Font("Dialog", 1, 26)); // NOI18N
-        Shu69Txtarea.setForeground(new java.awt.Color(51, 51, 51));
+        Shu69Txtarea.setFont(new java.awt.Font("Palatino Linotype", 0, 30)); // NOI18N
+        Shu69Txtarea.setForeground(new java.awt.Color(204, 204, 204));
         Shu69Txtarea.setLineWrap(true);
         Shu69Txtarea.setRows(5);
+        Shu69Txtarea.setMargin(new java.awt.Insets(50, 150, 50, 150));
         jScrollPane1.setViewportView(Shu69Txtarea);
 
         Logger.addTab("Story", jScrollPane1);
