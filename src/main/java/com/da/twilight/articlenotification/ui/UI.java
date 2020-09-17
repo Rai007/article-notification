@@ -138,8 +138,6 @@ public class UI extends javax.swing.JFrame implements IUI {
         Shu69Txt = new javax.swing.JTextField();
         contentChannelCb = new javax.swing.JComboBox<>();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
         jButton1.setText("Refresh");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -295,6 +293,7 @@ public class UI extends javax.swing.JFrame implements IUI {
             public void mouseClicked(MouseEvent me) {
                 if(me.getClickCount() >= 2){
                     setVisible(true);
+                    setState(JFrame.NORMAL);
                 }
             }
 
@@ -344,8 +343,6 @@ public class UI extends javax.swing.JFrame implements IUI {
         //trayIcon.displayMessage("Tuyencv-reader","Truyencv-reader started...", TrayIcon.MessageType.INFO);
         // default windows already have notify sound so we don't need add another sound
         // playSound("sound/slow-spring-board-longer-tail.wav");
-        
-        setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
     }
     
     protected Image createImage(String path, String description) {
